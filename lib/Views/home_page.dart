@@ -1,5 +1,7 @@
 import 'package:blood_donation/Shared/shared_data.dart';
+import 'package:blood_donation/Views/authentication.dart';
 import 'package:blood_donation/Views/offer_page.dart';
+import 'package:blood_donation/Views/offers_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,6 +37,71 @@ class _HomePageState extends State<HomePage>
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.red,
+              ),
+              child: Center(
+                child: Text(
+                  'Blood Donation',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+            ),
+            ListTile(
+              title: const Text('Home'),
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            ListTile(
+              title: const Text('Offers'),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => const OffersPage(),
+                  ),
+                );
+              },
+            ),
+            SizedBox(
+              height: 100,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      top: BorderSide(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    color: Colors.red,
+                  ),
+                  child: ListTile(
+                    leading: const Icon(Icons.logout),
+                    title: const Text('Logout'),
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const Authentication(),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
       body: Column(
@@ -95,18 +162,19 @@ class _HomePageState extends State<HomePage>
           SingleChildScrollView(
             child: Column(
               children: [
-                ListTile(
-                  title: const Text("Item 1"),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: const Text("Item 2"),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: const Text("Item 3"),
-                  onTap: () {},
-                ),
+                for (var offer in offers)
+                  ListTile(
+                    title: Text(offer.name),
+                    subtitle: Text(offer.description),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              OfferPage(offer: offer),
+                        ),
+                      );
+                    },
+                  ),
               ],
             ),
           ),
