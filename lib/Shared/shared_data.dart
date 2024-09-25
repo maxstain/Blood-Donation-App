@@ -1,4 +1,5 @@
 import 'package:blood_donation/Models/Offer.dart';
+import 'package:blood_donation/Shared/shared_types.dart';
 
 List<Offer> offers = [
   Offer(
@@ -6,20 +7,20 @@ List<Offer> offers = [
     name: 'John Doe',
     description: 'Blood Type: A+',
     image: 'assets/images/blood_donation.jpeg',
-    category: 'A+',
+    bloodType: BloodTypes.Apos,
   ),
   Offer(
     id: '2',
     name: 'Jane Doe',
     description: 'Blood Type: B+',
     image: 'assets/images/blood_donation.jpeg',
-    category: 'B+',
+    bloodType: BloodTypes.Bpos,
   ),
   Offer(
     id: '3',
     name: 'John Smith',
     description: 'Blood Type: O+',
     image: 'assets/images/blood_donation.jpeg',
-    category: 'O+',
+    bloodType: BloodTypes.Opos,
   ),
 ];
