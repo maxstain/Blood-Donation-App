@@ -8,6 +8,8 @@ List<Offer> offers = [
     description: 'Needs blood donation for urgent surgery.',
     image: 'assets/images/blood_donation.jpeg',
     bloodType: BloodTypes.Apos,
+    userType: UserTypes.recipient,
+    donationStatus: DonationStatus.pending,
   ),
   Offer(
     id: '2',
@@ -15,6 +17,8 @@ List<Offer> offers = [
     description: 'Donating blood to help a friend in need.',
     image: 'assets/images/blood_donation.jpeg',
     bloodType: BloodTypes.Bpos,
+    userType: UserTypes.donor,
+    donationStatus: DonationStatus.accepted,
   ),
   Offer(
     id: '3',
@@ -22,6 +26,8 @@ List<Offer> offers = [
     description: 'Regular blood donor, committed to saving lives.',
     image: 'assets/images/blood_donation.jpeg',
     bloodType: BloodTypes.Opos,
+    userType: UserTypes.donor,
+    donationStatus: DonationStatus.accepted,
   ),
   Offer(
     id: '4',
@@ -29,6 +35,8 @@ List<Offer> offers = [
     description: 'Looking for a blood donor for a child in need.',
     image: 'assets/images/blood_donation.jpeg',
     bloodType: BloodTypes.ABneg,
+    userType: UserTypes.recipient,
+    donationStatus: DonationStatus.pending,
   ),
   Offer(
     id: '5',
@@ -36,6 +44,8 @@ List<Offer> offers = [
     description: 'Donating blood to support cancer patients.',
     image: 'assets/images/blood_donation.jpeg',
     bloodType: BloodTypes.Aneg,
+    userType: UserTypes.donor,
+    donationStatus: DonationStatus.pending,
   ),
   Offer(
     id: '6',
@@ -43,6 +53,8 @@ List<Offer> offers = [
     description: 'Needs blood donation for a heart surgery.',
     image: 'assets/images/blood_donation.jpeg',
     bloodType: BloodTypes.Bneg,
+    userType: UserTypes.recipient,
+    donationStatus: DonationStatus.accepted,
   ),
   Offer(
     id: '7',
@@ -50,6 +62,8 @@ List<Offer> offers = [
     description: 'Donating blood to help with a blood disorder.',
     image: 'assets/images/blood_donation.jpeg',
     bloodType: BloodTypes.ABpos,
+    userType: UserTypes.donor,
+    donationStatus: DonationStatus.pending,
   ),
   Offer(
     id: '8',
@@ -57,6 +71,8 @@ List<Offer> offers = [
     description: 'Looking for a blood donor for a newborn baby.',
     image: 'assets/images/blood_donation.jpeg',
     bloodType: BloodTypes.Oneg,
+    userType: UserTypes.recipient,
+    donationStatus: DonationStatus.accepted,
   ),
   Offer(
     id: '9',
@@ -64,6 +80,8 @@ List<Offer> offers = [
     description: 'Donating blood to support victims of natural disasters.',
     image: 'assets/images/blood_donation.jpeg',
     bloodType: BloodTypes.Apos,
+    userType: UserTypes.donor,
+    donationStatus: DonationStatus.pending,
   ),
   Offer(
     id: '10',
@@ -71,6 +89,8 @@ List<Offer> offers = [
     description: 'Needs blood donation for a bone marrow transplant.',
     image: 'assets/images/blood_donation.jpeg',
     bloodType: BloodTypes.Bpos,
+    userType: UserTypes.recipient,
+    donationStatus: DonationStatus.accepted,
   ),
   Offer(
     id: '11',
@@ -78,6 +98,8 @@ List<Offer> offers = [
     description: 'Donating blood to help with emergency surgeries.',
     image: 'assets/images/blood_donation.jpeg',
     bloodType: BloodTypes.Opos,
+    userType: UserTypes.donor,
+    donationStatus: DonationStatus.pending,
   ),
   Offer(
     id: '12',
@@ -85,6 +107,8 @@ List<Offer> offers = [
     description: 'Looking for a blood donor for a sickle cell patient.',
     image: 'assets/images/blood_donation.jpeg',
     bloodType: BloodTypes.ABneg,
+    userType: UserTypes.recipient,
+    donationStatus: DonationStatus.accepted,
   ),
   Offer(
     id: '13',
@@ -92,6 +116,8 @@ List<Offer> offers = [
     description: 'Donating blood to support victims of accidents.',
     image: 'assets/images/blood_donation.jpeg',
     bloodType: BloodTypes.Aneg,
+    userType: UserTypes.donor,
+    donationStatus: DonationStatus.pending,
   ),
   Offer(
     id: '14',
@@ -99,6 +125,8 @@ List<Offer> offers = [
     description: 'Needs blood donation for a chronic illness.',
     image: 'assets/images/blood_donation.jpeg',
     bloodType: BloodTypes.Bneg,
+    userType: UserTypes.recipient,
+    donationStatus: DonationStatus.accepted,
   ),
   Offer(
     id: '15',
@@ -106,6 +134,8 @@ List<Offer> offers = [
     description: 'Donating blood to help with research on blood diseases.',
     image: 'assets/images/blood_donation.jpeg',
     bloodType: BloodTypes.ABpos,
+    userType: UserTypes.donor,
+    donationStatus: DonationStatus.pending,
   ),
   Offer(
     id: '16',
@@ -114,6 +144,8 @@ List<Offer> offers = [
         'Looking for a blood donor for a patient in need of a transfusion.',
     image: 'assets/images/blood_donation.jpeg',
     bloodType: BloodTypes.Oneg,
+    userType: UserTypes.recipient,
+    donationStatus: DonationStatus.accepted,
   ),
   Offer(
     id: '17',
@@ -121,6 +153,8 @@ List<Offer> offers = [
     description: 'Donating blood to support victims of violence.',
     image: 'assets/images/blood_donation.jpeg',
     bloodType: BloodTypes.Apos,
+    userType: UserTypes.donor,
+    donationStatus: DonationStatus.pending,
   ),
   Offer(
     id: '18',
@@ -128,6 +162,8 @@ List<Offer> offers = [
     description: 'Needs blood donation for a rare blood disorder.',
     image: 'assets/images/blood_donation.jpeg',
     bloodType: BloodTypes.Bpos,
+    userType: UserTypes.recipient,
+    donationStatus: DonationStatus.accepted,
   ),
   Offer(
     id: '19',
@@ -135,6 +171,8 @@ List<Offer> offers = [
     description: 'Donating blood to help with medical emergencies.',
     image: 'assets/images/blood_donation.jpeg',
     bloodType: BloodTypes.Opos,
+    userType: UserTypes.donor,
+    donationStatus: DonationStatus.pending,
   ),
   Offer(
     id: '20',
@@ -142,5 +180,7 @@ List<Offer> offers = [
     description: 'Looking for a blood donor for a patient in need of surgery.',
     image: 'assets/images/blood_donation.jpeg',
     bloodType: BloodTypes.ABneg,
+    userType: UserTypes.recipient,
+    donationStatus: DonationStatus.accepted,
   ),
 ];

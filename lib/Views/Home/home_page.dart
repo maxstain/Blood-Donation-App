@@ -1,7 +1,8 @@
 import 'package:blood_donation/Shared/shared_data.dart';
-import 'package:blood_donation/Views/authentication.dart';
-import 'package:blood_donation/Views/offer_page.dart';
-import 'package:blood_donation/Views/offers_page.dart';
+import 'package:blood_donation/Shared/shared_types.dart';
+import 'package:blood_donation/Views/Authentication/authentication.dart';
+import 'package:blood_donation/Views/Offers/offer_page.dart';
+import 'package:blood_donation/Views/Offers/offers_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -36,6 +37,16 @@ class _HomePageState extends State<HomePage>
           'Blood Donation',
           style: TextStyle(
             fontWeight: FontWeight.bold,
+          ),
+        ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Theme.of(context).colorScheme.secondary,
+                Theme.of(context).colorScheme.primary,
+              ],
+            ),
           ),
         ),
       ),
@@ -110,7 +121,7 @@ class _HomePageState extends State<HomePage>
             height: 60,
             child: Center(
               child: Text(
-                "Offers",
+                "Urgent Requests",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 24,
@@ -125,25 +136,29 @@ class _HomePageState extends State<HomePage>
               scrollDirection: Axis.horizontal,
               itemCount: offers.length,
               itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            OfferPage(offer: offers[index]),
-                      ),
-                    );
-                  },
-                  child: Card(
-                    surfaceTintColor: Colors.red,
-                    child: SizedBox(
-                      width: 300,
-                      child: Center(
-                        child: Text(offers[index].name),
+                if (offers[index].donationStatus == DonationStatus.pending) {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              OfferPage(offer: offers[index]),
+                        ),
+                      );
+                    },
+                    child: Card(
+                      surfaceTintColor: Colors.red,
+                      child: SizedBox(
+                        width: 300,
+                        child: Center(
+                          child: Text(offers[index].name),
+                        ),
                       ),
                     ),
-                  ),
-                );
+                  );
+                } else {
+                  return const SizedBox();
+                }
               },
             ),
           ),
@@ -151,7 +166,7 @@ class _HomePageState extends State<HomePage>
             height: 60,
             child: Center(
               child: Text(
-                "Footer",
+                "Offers",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 24,

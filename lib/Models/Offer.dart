@@ -6,6 +6,8 @@ class Offer {
   String description;
   String image;
   BloodTypes bloodType;
+  UserTypes userType = UserTypes.donor;
+  DonationStatus donationStatus = DonationStatus.pending;
 
   Offer({
     required this.id,
@@ -13,5 +15,7 @@ class Offer {
     required this.description,
     required this.image,
     required this.bloodType,
+    required this.userType,
+    required this.donationStatus,
   });
 }

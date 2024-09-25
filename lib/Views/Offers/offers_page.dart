@@ -1,5 +1,5 @@
 import 'package:blood_donation/Shared/shared_data.dart';
-import 'package:blood_donation/Views/offer_page.dart';
+import 'package:blood_donation/Views/Offers/offer_page.dart';
 import 'package:flutter/material.dart';
 
 class OffersPage extends StatefulWidget {
@@ -19,6 +19,16 @@ class _OffersPageState extends State<OffersPage> {
           'Offers',
           style: TextStyle(
             fontWeight: FontWeight.bold,
+          ),
+        ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Theme.of(context).colorScheme.secondary,
+                Theme.of(context).colorScheme.primary,
+              ],
+            ),
           ),
         ),
       ),
