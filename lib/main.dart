@@ -1,6 +1,4 @@
 import 'package:blood_donation/Views/authentication.dart';
-import 'package:blood_donation/Views/home_page.dart';
-import 'package:blood_donation/Views/offer_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
