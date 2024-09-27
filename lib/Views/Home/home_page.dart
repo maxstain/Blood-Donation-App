@@ -3,6 +3,7 @@ import 'package:blood_donation/Shared/shared_types.dart';
 import 'package:blood_donation/Views/Authentication/authentication.dart';
 import 'package:blood_donation/Views/Offers/offer_page.dart';
 import 'package:blood_donation/Views/Offers/offers_page.dart';
+import 'package:blood_donation/Widgets/request_card.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -130,7 +131,7 @@ class _HomePageState extends State<HomePage>
             ),
           ),
           SizedBox(
-            height: 120,
+            height: 210.0,
             width: double.infinity,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -146,14 +147,8 @@ class _HomePageState extends State<HomePage>
                         ),
                       );
                     },
-                    child: Card(
-                      surfaceTintColor: Colors.red,
-                      child: SizedBox(
-                        width: 300,
-                        child: Center(
-                          child: Text(offers[index].name),
-                        ),
-                      ),
+                    child: RequestCard(
+                      offer: offers[index],
                     ),
                   );
                 } else {
