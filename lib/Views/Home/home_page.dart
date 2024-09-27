@@ -174,24 +174,29 @@ class _HomePageState extends State<HomePage>
               ),
             ),
           ),
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                for (var offer in offers)
-                  ListTile(
-                    title: Text(offer.name),
-                    subtitle: Text(offer.description),
+          Expanded(
+            flex: 1,
+            child: ListView.builder(
+                itemCount: offers.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    leading: const Icon(
+                      Icons.bloodtype,
+                      color: Colors.red,
+                    ),
+                    title: Text(offers[index].name),
+                    subtitle: Text(offers[index].description),
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              OfferPage(offer: offer),
+                          builder: (BuildContext context) {
+                            return OfferPage(offer: offers[index]);
+                          },
                         ),
                       );
                     },
-                  ),
-              ],
-            ),
+                  );
+                }),
           ),
         ],
       ),
