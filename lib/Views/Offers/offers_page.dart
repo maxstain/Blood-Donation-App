@@ -10,6 +10,8 @@ class OffersPage extends StatefulWidget {
 }
 
 class _OffersPageState extends State<OffersPage> {
+  final TextEditingController _searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +21,15 @@ class _OffersPageState extends State<OffersPage> {
           'Offers',
           style: TextStyle(
             fontWeight: FontWeight.bold,
+          ),
+        ),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(60),
+          child: SizedBox(
+            child: SearchBar(
+              hintText: "Search for offers",
+              controller: _searchController,
+            ),
           ),
         ),
         flexibleSpace: Container(
