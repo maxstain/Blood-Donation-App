@@ -125,22 +125,10 @@ class _OfferPageState extends State<OfferPage> {
                     onPressed: () {
                       setState(() {
                         widget.offer.donationStatus = DonationStatus.accepted;
-                        FlutterLocalNotificationsPlugin().show(
-                          0,
-                          'Donation accepted',
-                          'Your donation has been accepted, thank you for your help',
-                          const NotificationDetails(
-                            android: AndroidNotificationDetails(
-                              'channelId',
-                              'channelName',
-                              enableVibration: true,
-                              importance: Importance.max,
-                              icon: '@mipmap/ic_launcher',
-                            ),
-                            iOS: DarwinNotificationDetails(),
-                          ),
+                        sendNotification(
+                        'Donation accepted',
+                        'Your donation has been accepted, thank you for your help',
                         );
-                      });
                     },
                     child: const Text('Accept'),
                   ),
