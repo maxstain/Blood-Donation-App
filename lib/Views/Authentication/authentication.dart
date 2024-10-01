@@ -19,10 +19,14 @@ class _AuthenticationState extends State<Authentication> {
     return Scaffold(
       body: Form(
         key: _formKey,
-        child: Column(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        child: ListView(
           children: [
-            const SizedBox(
-              height: 100,
+            const Padding(
+              padding: EdgeInsets.only(
+                top: 150.0,
+                bottom: 40.0,
+              ),
               child: Center(
                 child: Text(
                   'Login',
@@ -34,38 +38,57 @@ class _AuthenticationState extends State<Authentication> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(
+                vertical: 8.0,
+                horizontal: 16.0,
+              ),
               child: TextFormField(
                 controller: emailController,
                 decoration: const InputDecoration(
                   labelText: 'Email',
+                  icon: Icon(Icons.email),
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(
+                vertical: 8.0,
+                horizontal: 16.0,
+              ),
               child: TextFormField(
                 obscureText: true,
                 controller: passwordController,
                 decoration: const InputDecoration(
                   labelText: 'Password',
+                  icon: Icon(Icons.key),
                 ),
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  if (emailController.text != '' &&
-                      passwordController.text != '') {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const HomePage(),
-                      ),
-                    );
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 20.0,
+              ),
+              child: ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    if (emailController.text != '' &&
+                        passwordController.text != '') {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const HomePage(),
+                        ),
+                      );
+                    }
                   }
-                }
-              },
-              child: const Text('Login'),
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 16.0,
+                    horizontal: 150.0,
+                  ),
+                ),
+                child: const Text('Login'),
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

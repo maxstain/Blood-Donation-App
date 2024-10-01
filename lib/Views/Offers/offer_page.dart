@@ -1,5 +1,6 @@
 import 'package:blood_donation/Shared/shared_types.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import '../../Models/Offer.dart';
 
@@ -121,7 +122,26 @@ class _OfferPageState extends State<OfferPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        widget.offer.donationStatus = DonationStatus.accepted;
+                        FlutterLocalNotificationsPlugin().show(
+                          0,
+                          'Donation accepted',
+                          'Your donation has been accepted, thank you for your help',
+                          const NotificationDetails(
+                            android: AndroidNotificationDetails(
+                              'channelId',
+                              'channelName',
+                              enableVibration: true,
+                              importance: Importance.max,
+                              icon: '@mipmap/ic_launcher',
+                            ),
+                            iOS: DarwinNotificationDetails(),
+                          ),
+                        );
+                      });
+                    },
                     child: const Text('Accept'),
                   ),
                   const SizedBox(
