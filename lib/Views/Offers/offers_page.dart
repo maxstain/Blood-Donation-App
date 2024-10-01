@@ -4,7 +4,7 @@ import 'package:blood_donation/Views/Offers/offer_page.dart';
 import 'package:flutter/material.dart';
 
 class OffersPage extends StatefulWidget {
-  const OffersPage({Key? key}) : super(key: key);
+  const OffersPage({super.key});
 
   @override
   _OffersPageState createState() => _OffersPageState();
