@@ -1,3 +1,4 @@
+import 'package:blood_donation/Services/AuthenticationServices.dart';
 import 'package:blood_donation/Views/Home/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -69,11 +70,13 @@ class _AuthenticationState extends State<Authentication> {
                 vertical: 20.0,
               ),
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     if (emailController.text != '' &&
                         passwordController.text != '') {
-                      Navigator.of(context).push(
+                      await AuthenticationServices().signInWithEmailAndPassword(
+                          emailController.text, passwordController.text);
+                      Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) => const HomePage(),
                         ),

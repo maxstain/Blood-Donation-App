@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "449464963211",
+    "project_id": "jci-blood-donation",
+    "storage_bucket": "jci-blood-donation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:449464963211:android:5c73d40eccd49d2cc4c48e",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "449464963211-sk8t6dfvkdjiqg11163mk6kvpk3tob91.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQfy4ecRsrhLx1g141xviKmy9Tk4THwaE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "449464963211-sk8t6dfvkdjiqg11163mk6kvpk3tob91.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
