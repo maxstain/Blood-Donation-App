@@ -33,6 +33,58 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return SimpleDialog(
+                title: const Text('Add Offer'),
+                children: [
+                  SimpleDialogOption(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => const OffersPage(),
+                        ),
+                      );
+                    },
+                    child: const Text('Add Offer'),
+                  ),
+                  SimpleDialogOption(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return SimpleDialog(
+                              title: const Text('Add Request'),
+                              children: [
+                                SimpleDialogOption(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            const OffersPage(),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text('Add Request'),
+                                ),
+                              ],
+                            );
+                          });
+                    },
+                    child: const Text('Add Request'),
+                  ),
+                ],
+              );
+            },
+          );
+        },
+      ),
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         title: const Text(
@@ -79,6 +131,7 @@ class _HomePageState extends State<HomePage>
             ListTile(
               title: const Text('Offers'),
               onTap: () {
+                Navigator.of(context).pop();
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (BuildContext context) => const OffersPage(),
@@ -104,6 +157,7 @@ class _HomePageState extends State<HomePage>
                     title: const Text('Logout'),
                     onTap: () async {
                       await AuthenticationServices().signOut();
+                      Navigator.of(context).pop();
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (BuildContext context) =>
