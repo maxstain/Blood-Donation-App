@@ -14,4 +14,13 @@ class AuthenticationServices {
       Fluttertoast.showToast(msg: "Failed to authenticate");
     }
   }
+
+  // Sign out
+  Future signOut() async {
+    try {
+      await _firebaseAuth.signOut();
+    } catch (e) {
+      Fluttertoast.showToast(msg: "Failed to sign out");
+    }
+  }
 }

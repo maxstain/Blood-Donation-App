@@ -1,5 +1,6 @@
 import 'package:blood_donation/Services/AuthenticationServices.dart';
 import 'package:blood_donation/Views/Home/home_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -18,6 +19,7 @@ class _AuthenticationState extends State<Authentication> {
 
   @override
   Widget build(BuildContext context) {
+    Color selectedColor = Colors.black;
     return Scaffold(
       body: Form(
         key: _formKey,
@@ -46,10 +48,29 @@ class _AuthenticationState extends State<Authentication> {
               ),
               child: TextFormField(
                 controller: emailController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Email',
-                  icon: Icon(Icons.email),
+                  icon: Icon(
+                    Icons.email,
+                    color: selectedColor,
+                  ),
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a valid email address';
+                  }
+                  return null;
+                },
+                onTap: () {
+                  setState(() {
+                    selectedColor = Colors.red;
+                  });
+                },
+                onTapOutside: (PointerDownEvent event) {
+                  setState(() {
+                    selectedColor = Colors.black;
+                  });
+                },
               ),
             ),
             Padding(
@@ -60,10 +81,23 @@ class _AuthenticationState extends State<Authentication> {
               child: TextFormField(
                 obscureText: true,
                 controller: passwordController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Password',
-                  icon: Icon(Icons.key),
+                  icon: Icon(
+                    Icons.key,
+                    color: selectedColor,
+                  ),
                 ),
+                onTap: () {
+                  setState(() {
+                    selectedColor = Colors.red;
+                  });
+                },
+                onTapOutside: (PointerDownEvent event) {
+                  setState(() {
+                    selectedColor = Colors.black;
+                  });
+                },
               ),
             ),
             Padding(
@@ -75,13 +109,16 @@ class _AuthenticationState extends State<Authentication> {
                   if (_formKey.currentState!.validate()) {
                     if (emailController.text != '' &&
                         passwordController.text != '') {
-                      await AuthenticationServices().signInWithEmailAndPassword(
-                          emailController.text, passwordController.text);
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => const HomePage(),
-                        ),
-                      );
+                      UserCredential user = await AuthenticationServices()
+                          .signInWithEmailAndPassword(
+                              emailController.text, passwordController.text);
+                      if (user != null) {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage(),
+                          ),
+                        );
+                      }
                     } else {
                       Fluttertoast.showToast(msg: "Please fill all fields");
                     }

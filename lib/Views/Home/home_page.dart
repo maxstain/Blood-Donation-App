@@ -1,3 +1,4 @@
+import 'package:blood_donation/Services/AuthenticationServices.dart';
 import 'package:blood_donation/Shared/shared_data.dart';
 import 'package:blood_donation/Shared/shared_types.dart';
 import 'package:blood_donation/Views/Authentication/authentication.dart';
@@ -101,7 +102,8 @@ class _HomePageState extends State<HomePage>
                   child: ListTile(
                     leading: const Icon(Icons.logout),
                     title: const Text('Logout'),
-                    onTap: () {
+                    onTap: () async {
+                      await AuthenticationServices().signOut();
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (BuildContext context) =>
