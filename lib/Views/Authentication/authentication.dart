@@ -1,6 +1,7 @@
 import 'package:blood_donation/Services/AuthenticationServices.dart';
 import 'package:blood_donation/Views/Home/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Authentication extends StatefulWidget {
   const Authentication({super.key});
@@ -81,6 +82,8 @@ class _AuthenticationState extends State<Authentication> {
                           builder: (context) => const HomePage(),
                         ),
                       );
+                    } else {
+                      Fluttertoast.showToast(msg: "Please fill all fields");
                     }
                   }
                 },

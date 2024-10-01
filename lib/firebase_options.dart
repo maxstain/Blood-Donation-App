@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAQfy4ecRsrhLx1g141xviKmy9Tk4THwaE',
-    appId: '1:449464963211:android:5c73d40eccd49d2cc4c48e',
+    appId: '1:449464963211:android:364f47c3d062129dc4c48e',
     messagingSenderId: '449464963211',
     projectId: 'jci-blood-donation',
     storageBucket: 'jci-blood-donation.appspot.com',
@@ -66,4 +66,5 @@ class DefaultFirebaseOptions {
     iosClientId: '449464963211-40a1adpt3gvsm5b9ltceosg0lhoa14l9.apps.googleusercontent.com',
     iosBundleId: 'com.example.bloodDonation',
   );
+
 }
