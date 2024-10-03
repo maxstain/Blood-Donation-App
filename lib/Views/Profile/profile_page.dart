@@ -31,14 +31,15 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Image.network(FirebaseAuth.instance.currentUser?.photoURL ?? ''),
-            Text(FirebaseAuth.instance.currentUser?.displayName ?? ''),
-            Text('Email: ${FirebaseAuth.instance.currentUser?.email}'),
-          ],
-        ),
+      body: Column(
+        children: [
+          Center(
+            child: Image.network(
+                FirebaseAuth.instance.currentUser?.photoURL ?? ''),
+          ),
+          Text(FirebaseAuth.instance.currentUser?.displayName ?? ''),
+          Text('Email: ${FirebaseAuth.instance.currentUser?.email}'),
+        ],
       ),
     );
   }
