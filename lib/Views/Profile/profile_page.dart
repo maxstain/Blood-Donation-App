@@ -1,3 +1,4 @@
+import 'package:blood_donation/Services/UserServices.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,11 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+
+  final Userservices _userServices = Userservices();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,95 +37,218 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Center(
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Theme.of(context).colorScheme.secondary,
-                  width: 5,
-                ),
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Image.network(
-                FirebaseAuth.instance.currentUser?.photoURL ??
-                    'https://st3.depositphotos.com/6672868/13801/v/450/depositphotos_138013506-stock-illustration-user-profile-group.jpg',
-                height: 200,
-                width: 200,
-                fit: BoxFit.cover,
-                loadingBuilder: (BuildContext context, Widget child,
-                    ImageChunkEvent? loadingProgress) {
-                  if (loadingProgress == null) {
-                    return child;
-                  } else {
-                    return const CircularProgressIndicator();
-                  }
-                },
-              ),
-            ),
-          ),
-          Text(
-            FirebaseAuth.instance.currentUser?.displayName ?? 'Username',
-            style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.all(10),
-            child: Text(
-              "Email:",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    border: Border.all(
-                      color: Theme.of(context).colorScheme.secondary,
-                      width: 2,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
-                    '${FirebaseAuth.instance.currentUser?.email}',
-                    style: const TextStyle(
-                      fontSize: 18,
-                    ),
+      body: Form(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: CircleAvatar(
+                  radius: 70,
+                  backgroundImage: NetworkImage(
+                    FirebaseAuth.instance.currentUser?.photoURL ??
+                        'https://st3.depositphotos.com/6672868/13801/v/450/depositphotos_138013506-stock-illustration-user-profile-group.jpg',
                   ),
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.edit,
+              ),
+            ),
+            Center(
+              child: Text(
+                FirebaseAuth.instance.currentUser?.displayName ?? 'Username',
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8),
+              child: Text(
+                "Email:",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.secondary,
+                    width: 2,
                   ),
-                  color: Theme.of(context).colorScheme.primary,
-                  alignment: Alignment.center,
-                  style: ButtonStyle(
-                    shape: WidgetStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text(
+                        '${FirebaseAuth.instance.currentUser?.email}',
+                        style: const TextStyle(
+                          fontSize: 18,
+                        ),
                       ),
                     ),
-                    backgroundColor: WidgetStatePropertyAll(
-                      Colors.white,
-                    ),
-                  ),
-                )
-              ],
+                    IconButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: const Text('Update Email'),
+                              content: TextField(
+                                controller: _emailController,
+                                decoration: const InputDecoration(
+                                  hintText: 'Enter new email',
+                                ),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () async {
+                                    await _userServices.updateEmail(
+                                      _emailController.text,
+                                    );
+                                    setState(() {
+                                      Navigator.of(context).pop();
+                                    });
+                                  },
+                                  child: const Text('Update'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      icon: Icon(
+                        Icons.edit,
+                      ),
+                      color: Theme.of(context).colorScheme.primary,
+                      alignment: Alignment.center,
+                      style: ButtonStyle(
+                        shape: WidgetStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        backgroundColor: WidgetStatePropertyAll(
+                          Colors.white,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ),
-          ),
-        ],
+            const Padding(
+              padding: EdgeInsets.all(8),
+              child: Text(
+                "Username:",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.secondary,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text(
+                        FirebaseAuth.instance.currentUser?.displayName ??
+                            'Username',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: const Text('Update Username'),
+                              content: TextField(
+                                controller: _usernameController,
+                                decoration: const InputDecoration(
+                                  hintText: 'Enter new username',
+                                ),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () async {
+                                    await _userServices.updateDisplayName(
+                                      _usernameController.text,
+                                    );
+                                    setState(() {
+                                      Navigator.of(context).pop();
+                                    });
+                                  },
+                                  child: const Text('Update'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      icon: Icon(
+                        Icons.edit,
+                      ),
+                      color: Theme.of(context).colorScheme.primary,
+                      alignment: Alignment.center,
+                      style: ButtonStyle(
+                        shape: WidgetStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        backgroundColor: WidgetStatePropertyAll(
+                          Colors.white,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
