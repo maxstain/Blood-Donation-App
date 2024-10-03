@@ -66,21 +66,57 @@ class _ProfilePageState extends State<ProfilePage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              border: Border.all(
-                color: Theme.of(context).colorScheme.secondary,
-                width: 2,
-              ),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            padding: const EdgeInsets.all(10),
+          const Padding(
+            padding: EdgeInsets.all(10),
             child: Text(
-              'Email: ${FirebaseAuth.instance.currentUser?.email}',
-              style: const TextStyle(
+              "Email:",
+              style: TextStyle(
                 fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
+              textAlign: TextAlign.left,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.secondary,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: const EdgeInsets.all(10),
+                  child: Text(
+                    '${FirebaseAuth.instance.currentUser?.email}',
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.edit,
+                  ),
+                  color: Theme.of(context).colorScheme.primary,
+                  alignment: Alignment.center,
+                  style: ButtonStyle(
+                    shape: WidgetStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    backgroundColor: WidgetStatePropertyAll(
+                      Colors.white,
+                    ),
+                  ),
+                )
+              ],
             ),
           ),
         ],
