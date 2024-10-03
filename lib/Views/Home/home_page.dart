@@ -58,26 +58,27 @@ class _HomePageState extends State<HomePage>
                     onPressed: () {
                       Navigator.of(context).pop();
                       showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return SimpleDialog(
-                              title: const Text('Add Request'),
-                              children: [
-                                SimpleDialogOption(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            const OffersPage(),
-                                      ),
-                                    );
-                                  },
-                                  child: const Text('Add Request'),
-                                ),
-                              ],
-                            );
-                          });
+                        context: context,
+                        builder: (BuildContext context) {
+                          return SimpleDialog(
+                            title: const Text('Add Request'),
+                            children: [
+                              SimpleDialogOption(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          const OffersPage(),
+                                    ),
+                                  );
+                                },
+                                child: const Text('Add Request'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
                     child: const Text('Add Request'),
                   ),
