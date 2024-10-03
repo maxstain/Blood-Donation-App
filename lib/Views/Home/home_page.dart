@@ -5,6 +5,7 @@ import 'package:blood_donation/Views/Authentication/authentication.dart';
 import 'package:blood_donation/Views/Offers/offer_page.dart';
 import 'package:blood_donation/Views/Offers/offers_page.dart';
 import 'package:blood_donation/Widgets/request_card.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -108,25 +109,35 @@ class _HomePageState extends State<HomePage>
       drawer: Drawer(
         child: ListView(
           children: [
-            const DrawerHeader(
+            DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: Theme.of(context).colorScheme.secondary,
               ),
-              child: Center(
-                child: Text(
-                  'Blood Donation',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Welcome, ${FirebaseAuth.instance.currentUser!.displayName ?? "User"}',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
             ListTile(
-              title: const Text('Home'),
+              title: const Text('Profile'),
               onTap: () {
                 Navigator.of(context).pop();
+                // TODO: Implement Profile Page
+                // Navigator.of(context).push(
+                //   MaterialPageRoute(
+                //     builder: (BuildContext context) => const ProfilePage(),
+                //   ),
+                // );
               },
             ),
             ListTile(
@@ -145,17 +156,25 @@ class _HomePageState extends State<HomePage>
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     border: Border(
                       top: BorderSide(
                         color: Colors.grey,
                       ),
                     ),
-                    color: Colors.red,
+                    color: Theme.of(context).colorScheme.secondary,
                   ),
                   child: ListTile(
-                    leading: const Icon(Icons.logout),
-                    title: const Text('Logout'),
+                    leading: const Icon(
+                      Icons.logout,
+                      color: Colors.white,
+                    ),
+                    title: const Text(
+                      'Logout',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
                     onTap: () async {
                       await AuthenticationServices().signOut();
                       Navigator.of(context).pop();

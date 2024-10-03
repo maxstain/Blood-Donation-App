@@ -9,13 +9,24 @@ patients. The app is created using Flutter and Firebase.
 
 - User Authentication
 - User Profile
+    - Blood Donation History
+    - Blood Request History
 - Blood Donation
 - Blood Request
-- Blood Donation History
-- Blood Request History
 - Notifications
-- Chat
+- Chat with Donor/Patient
+- Admin Panel
+    - Manage Users
+    - Manage Blood Requests
+    - Manage Blood Donations
+    - Manage Notifications
 
 ## Screenshots
 
 COMING SOON!!!
+
+## Partners
+
+If you are interested in partnering with us, please contact us
+at [email](mailto:firaschabchoub@gmail.com).
+or visit our website [website](https://www.firaschabchoub.netlify.app).
