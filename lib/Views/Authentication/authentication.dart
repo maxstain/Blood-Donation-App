@@ -1,7 +1,5 @@
 import 'package:blood_donation/Services/AuthenticationServices.dart';
-import 'package:blood_donation/Views/Home/home_page.dart';
 import 'package:blood_donation/main.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -110,9 +108,8 @@ class _AuthenticationState extends State<Authentication> {
                   if (_formKey.currentState!.validate()) {
                     if (emailController.text != '' &&
                         passwordController.text != '') {
-                      UserCredential user = await AuthenticationServices()
-                          .signInWithEmailAndPassword(
-                              emailController.text, passwordController.text);
+                      await AuthenticationServices().signInWithEmailAndPassword(
+                          emailController.text, passwordController.text);
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) => const Wrapper(),
@@ -303,7 +300,7 @@ class _RegisterState extends State<Register> {
                         confirmPasswordController.text != '') {
                       if (passwordController.text ==
                           confirmPasswordController.text) {
-                        UserCredential user = await AuthenticationServices()
+                        await AuthenticationServices()
                             .registerWithEmailAndPassword(
                                 emailController.text, passwordController.text);
                         Navigator.of(context).pushReplacement(
