@@ -4,6 +4,7 @@ import 'package:blood_donation/Shared/shared_types.dart';
 import 'package:blood_donation/Views/Authentication/authentication.dart';
 import 'package:blood_donation/Views/Offers/offer_page.dart';
 import 'package:blood_donation/Views/Offers/offers_page.dart';
+import 'package:blood_donation/Views/Profile/profile_page.dart';
 import 'package:blood_donation/Widgets/request_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -132,12 +133,11 @@ class _HomePageState extends State<HomePage>
               title: const Text('Profile'),
               onTap: () {
                 Navigator.of(context).pop();
-                // TODO: Implement Profile Page
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (BuildContext context) => const ProfilePage(),
-                //   ),
-                // );
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => const ProfilePage(),
+                  ),
+                );
               },
             ),
             ListTile(
