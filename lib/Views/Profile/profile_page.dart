@@ -307,6 +307,39 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
+            Center(
+              child: TextButton(
+                onPressed: () async {
+                  await _userServices.deleteUser();
+                  Navigator.of(context).pop();
+                },
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all(
+                    Theme.of(context).colorScheme.error,
+                  ),
+                  padding: WidgetStateProperty.all(
+                    const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 10,
+                    ),
+                  ),
+                  fixedSize: WidgetStateProperty.all(
+                    Size(MediaQuery.sizeOf(context).width - 8.0, 50),
+                  ),
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+                child: const Text(
+                  'Delete Account',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

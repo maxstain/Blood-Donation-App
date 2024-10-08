@@ -42,4 +42,12 @@ class Userservices {
       return null;
     }
   }
+
+  Future<void> deleteUser() async {
+    try {
+      await _auth.currentUser?.delete();
+    } catch (e) {
+      print(e);
+    }
+  }
 }
