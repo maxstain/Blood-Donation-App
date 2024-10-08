@@ -18,7 +18,6 @@ class _ProfilePageState extends State<ProfilePage> {
   final Userservices _userServices = Userservices();
 
   final ImagePicker _picker = ImagePicker();
-  final XFile? _image = null;
 
   @override
   Widget build(BuildContext context) {
