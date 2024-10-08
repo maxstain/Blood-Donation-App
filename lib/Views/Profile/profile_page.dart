@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:blood_donation/Services/UserServices.dart';
 import 'package:blood_donation/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,6 +21,7 @@ class _ProfilePageState extends State<ProfilePage> {
   final ImagePicker _picker = ImagePicker();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
+  late var _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -61,18 +64,28 @@ class _ProfilePageState extends State<ProfilePage> {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
+                            scrollable: true,
                             actionsAlignment: MainAxisAlignment.center,
                             title: const Text('Update Profile Picture'),
+                            content: _isLoading == true
+                                ? CircularProgressIndicator()
+                                : Container(),
                             actions: [
                               TextButton(
                                 onPressed: () async {
-                                  final XFile? image = await _picker.pickImage(
-                                    source: ImageSource.camera,
-                                  );
+                                  setState(() {
+                                    _isLoading = true;
+                                  });
+                                  final File? image = await _picker
+                                      .pickImage(
+                                        source: ImageSource.camera,
+                                      )
+                                      .then((value) => File(value!.path));
                                   await _userServices.updatePhotoURL(
-                                    image!.path,
+                                    image!,
                                   );
                                   setState(() {
+                                    _isLoading = false;
                                     Navigator.of(context).pop();
                                   });
                                 },
@@ -80,13 +93,19 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               TextButton(
                                 onPressed: () async {
-                                  final XFile? image = await _picker.pickImage(
-                                    source: ImageSource.gallery,
-                                  );
+                                  setState(() {
+                                    _isLoading = true;
+                                  });
+                                  final File? image = await _picker
+                                      .pickImage(
+                                        source: ImageSource.gallery,
+                                      )
+                                      .then((value) => File(value!.path));
                                   await _userServices.updatePhotoURL(
-                                    image!.path,
+                                    image!,
                                   );
                                   setState(() {
+                                    _isLoading = false;
                                     Navigator.of(context).pop();
                                   });
                                 },

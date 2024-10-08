@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class Userservices {
   FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseStorage _storage = FirebaseStorage.instance;
 
   Future<User?> updateEmail(String email) async {
     try {
@@ -33,9 +37,16 @@ class Userservices {
     }
   }
 
-  Future<User?> updatePhotoURL(String photoURL) async {
+  Future<User?> updatePhotoURL(File photo) async {
     try {
-      await _auth.currentUser?.updatePhotoURL(photoURL);
+      await _storage
+          .ref("profile_pictures/${_auth.currentUser?.uid}")
+          .putFile(photo);
+      var path = await _storage
+          .ref(
+              "gs://jci-blood-donation.appspot.com/profile_pictures/${_auth.currentUser?.uid}")
+          .getDownloadURL();
+      await _auth.currentUser?.updatePhotoURL(path);
       return _auth.currentUser;
     } catch (e) {
       print(e);
