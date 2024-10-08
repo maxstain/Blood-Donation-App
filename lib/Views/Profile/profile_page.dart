@@ -60,41 +60,38 @@ class _ProfilePageState extends State<ProfilePage> {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
+                            actionsAlignment: MainAxisAlignment.center,
                             title: const Text('Update Profile Picture'),
-                            content: Column(
-                              children: [
-                                TextButton(
-                                  onPressed: () async {
-                                    final XFile? image =
-                                        await _picker.pickImage(
-                                      source: ImageSource.camera,
-                                    );
-                                    await _userServices.updatePhotoURL(
-                                      image!.path,
-                                    );
-                                    setState(() {
-                                      Navigator.of(context).pop();
-                                    });
-                                  },
-                                  child: const Text('Camera'),
-                                ),
-                                TextButton(
-                                  onPressed: () async {
-                                    final XFile? image =
-                                        await _picker.pickImage(
-                                      source: ImageSource.gallery,
-                                    );
-                                    await _userServices.updatePhotoURL(
-                                      image!.path,
-                                    );
-                                    setState(() {
-                                      Navigator.of(context).pop();
-                                    });
-                                  },
-                                  child: const Text('Gallery'),
-                                ),
-                              ],
-                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () async {
+                                  final XFile? image = await _picker.pickImage(
+                                    source: ImageSource.camera,
+                                  );
+                                  await _userServices.updatePhotoURL(
+                                    image!.path,
+                                  );
+                                  setState(() {
+                                    Navigator.of(context).pop();
+                                  });
+                                },
+                                child: const Text('Camera'),
+                              ),
+                              TextButton(
+                                onPressed: () async {
+                                  final XFile? image = await _picker.pickImage(
+                                    source: ImageSource.gallery,
+                                  );
+                                  await _userServices.updatePhotoURL(
+                                    image!.path,
+                                  );
+                                  setState(() {
+                                    Navigator.of(context).pop();
+                                  });
+                                },
+                                child: const Text('Gallery'),
+                              ),
+                            ],
                           );
                         },
                       );
