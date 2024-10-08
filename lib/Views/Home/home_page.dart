@@ -114,17 +114,32 @@ class _HomePageState extends State<HomePage>
             DrawerHeader(
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.secondary,
+                image: DecorationImage(
+                  image: NetworkImage(
+                    FirebaseAuth.instance.currentUser?.photoURL ??
+                        'https://st3.depositphotos.com/6672868/13801/v/450/depositphotos_138013506-stock-illustration-user-profile-group.jpg',
+                  ),
+                  fit: BoxFit.cover,
+                ),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Welcome, ${FirebaseAuth.instance.currentUser!.displayName ?? "User"}',
+                    'Welcome,',
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 24,
+                      fontSize: 20,
+                    ),
+                  ),
+                  Text(
+                    FirebaseAuth.instance.currentUser!.displayName ?? "User",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 26,
                     ),
                   ),
                 ],

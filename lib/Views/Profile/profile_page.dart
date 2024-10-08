@@ -1,6 +1,7 @@
 import 'package:blood_donation/Services/UserServices.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -14,6 +15,9 @@ class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController _usernameController = TextEditingController();
 
   final Userservices _userServices = Userservices();
+
+  final ImagePicker _picker = ImagePicker();
+  final XFile? _image = null;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +53,65 @@ class _ProfilePageState extends State<ProfilePage> {
                   backgroundImage: NetworkImage(
                     FirebaseAuth.instance.currentUser?.photoURL ??
                         'https://st3.depositphotos.com/6672868/13801/v/450/depositphotos_138013506-stock-illustration-user-profile-group.jpg',
+                  ),
+                  child: IconButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text('Update Profile Picture'),
+                            content: Column(
+                              children: [
+                                TextButton(
+                                  onPressed: () async {
+                                    final XFile? image =
+                                        await _picker.pickImage(
+                                      source: ImageSource.camera,
+                                    );
+                                    await _userServices.updatePhotoURL(
+                                      image!.path,
+                                    );
+                                    setState(() {
+                                      Navigator.of(context).pop();
+                                    });
+                                  },
+                                  child: const Text('Camera'),
+                                ),
+                                TextButton(
+                                  onPressed: () async {
+                                    final XFile? image =
+                                        await _picker.pickImage(
+                                      source: ImageSource.gallery,
+                                    );
+                                    await _userServices.updatePhotoURL(
+                                      image!.path,
+                                    );
+                                    setState(() {
+                                      Navigator.of(context).pop();
+                                    });
+                                  },
+                                  child: const Text('Gallery'),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.edit,
+                    ),
+                    color: Colors.white,
+                    alignment: Alignment.center,
+                    style: ButtonStyle(
+                      iconSize: WidgetStateProperty.all(50),
+                      shape: WidgetStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
