@@ -1,4 +1,5 @@
 import 'package:blood_donation/Services/UserServices.dart';
+import 'package:blood_donation/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -315,6 +316,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 onPressed: () async {
                   await _userServices.deleteUser();
                   Navigator.of(context).pop();
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const Wrapper(),
+                    ),
+                  );
                 },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.all(
