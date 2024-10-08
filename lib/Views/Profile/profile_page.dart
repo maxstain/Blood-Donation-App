@@ -307,6 +307,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 10,
+            ),
             Center(
               child: TextButton(
                 onPressed: () async {
