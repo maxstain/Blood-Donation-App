@@ -34,6 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
             fontWeight: FontWeight.bold,
           ),
         ),
+        centerTitle: true,
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -100,7 +101,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                       .pickImage(
                                         source: ImageSource.gallery,
                                       )
-                                      .then((value) => File(value!.path));
+                                      .then(
+                                        (value) => File(
+                                          value!.path,
+                                        ),
+                                      );
                                   await _userServices.updatePhotoURL(
                                     image!,
                                   );
