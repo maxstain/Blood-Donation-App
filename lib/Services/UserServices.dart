@@ -15,7 +15,7 @@ class Userservices {
     try {
       await _auth.currentUser?.updateEmail(email);
       await _firestore
-          .collection('users')
+          .collection('Users')
           .doc(_auth.currentUser?.uid)
           .update({'email': email});
       await _auth.currentUser?.reload();
@@ -30,7 +30,7 @@ class Userservices {
     try {
       await _auth.currentUser?.updatePassword(password);
       await _firestore
-          .collection('users')
+          .collection('Users')
           .doc(_auth.currentUser?.uid)
           .update({'password': password});
       await _auth.currentUser?.reload();
@@ -45,7 +45,7 @@ class Userservices {
     try {
       await _auth.currentUser?.updateDisplayName(displayName);
       await _firestore
-          .collection('users')
+          .collection('Users')
           .doc(_auth.currentUser?.uid)
           .update({'displayName': displayName});
       await _auth.currentUser?.reload();
@@ -80,7 +80,7 @@ class Userservices {
               "gs://jci-blood-donation.appspot.com/profile_pictures/${_auth.currentUser?.uid}")
           .getDownloadURL();
       await _auth.currentUser?.updatePhotoURL(path);
-      await _firestore.collection('users').doc(_auth.currentUser?.uid).update({
+      await _firestore.collection('Users').doc(_auth.currentUser?.uid).update({
         'photoURL':
             "gs://jci-blood-donation.appspot.com/profile_pictures/${_auth.currentUser?.uid}"
       });
