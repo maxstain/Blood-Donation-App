@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:blood_donation/Models/UserData.dart';
 import 'package:blood_donation/Services/UserServices.dart';
 import 'package:blood_donation/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,12 +17,20 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   // Services
   final Userservices _userServices = Userservices();
+  late UserData _userData = UserData.empty;
 
   // Variables
   final ImagePicker _picker = ImagePicker();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   late var _isLoading = false;
+
+  // An on init method to get the user data
+  void onInit() async {
+    _userData = await _userServices.getUserData();
+    _emailController.text = _userData.email;
+    _usernameController.text = _userData.displayName;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -248,7 +257,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       Text(
-                        'Blood Group',
+                        'Blood type',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,

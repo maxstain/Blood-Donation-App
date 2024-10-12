@@ -27,19 +27,6 @@ class AuthenticationServices {
     }
   }
 
-  Future<UserData> getUserData() async {
-    try {
-      DocumentSnapshot documentSnapshot = await _firestore
-          .collection("Users")
-          .doc(_firebaseAuth.currentUser?.uid)
-          .get();
-      return UserData.fromMap(documentSnapshot.data() as Map<String, dynamic>);
-    } catch (e) {
-      Fluttertoast.showToast(msg: "Failed to get user data");
-      return UserData.empty;
-    }
-  }
-
   // Register with email and password
   Future registerWithEmailAndPassword(String email, String password) async {
     try {
