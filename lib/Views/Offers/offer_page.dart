@@ -1,4 +1,3 @@
-import 'package:blood_donation/Services/NotificationServices.dart';
 import 'package:blood_donation/Shared/shared_types.dart';
 import 'package:flutter/material.dart';
 
@@ -125,10 +124,6 @@ class _OfferPageState extends State<OfferPage> {
                     onPressed: () {
                       setState(() {
                         widget.offer.donationStatus = DonationStatus.accepted;
-                        NotificationServices.sendNotification(
-                          'Donation accepted',
-                          'Your donation has been accepted, thank you for your help',
-                        );
                       });
                     },
                     child: const Text('Accept'),
