@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:blood_donation/Models/UserData.dart';
 import 'package:blood_donation/Services/UserServices.dart';
+import 'package:blood_donation/Widgets/profile_info_container.dart';
 import 'package:blood_donation/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
+        backgroundColor: Colors.transparent,
         title: const Text(
           'Profile',
           style: TextStyle(
@@ -233,38 +234,19 @@ class _ProfilePageState extends State<ProfilePage> {
             Padding(
               padding: EdgeInsets.all(8),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            border: Border.all(
-                              color: Theme.of(context).colorScheme.secondary,
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Text(
-                            'A+',
-                            style: const TextStyle(
-                              fontSize: 18,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'Blood type',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                    ],
+                  ProfileInfoContainer(
+                    data: 'A+',
+                    title: 'Blood Type',
+                  ),
+                  ProfileInfoContainer(
+                    data: '0',
+                    title: 'Donated',
+                  ),
+                  ProfileInfoContainer(
+                    data: '0',
+                    title: 'Requested',
                   ),
                 ],
               ),
