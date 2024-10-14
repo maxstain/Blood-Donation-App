@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:blood_donation/Models/UserData.dart';
 import 'package:blood_donation/Services/UserServices.dart';
+import 'package:blood_donation/Views/Profile/edit_profile_page.dart';
 import 'package:blood_donation/Widgets/profile_info_container.dart';
 import 'package:blood_donation/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,22 +23,22 @@ class _ProfilePageState extends State<ProfilePage> {
 
   // Variables
   final ImagePicker _picker = ImagePicker();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _usernameController = TextEditingController();
   late var _isLoading = false;
 
-  // An on init method to get the user data
-  void onInit() async {
-    _userData = await _userServices.getUserData();
-    _emailController.text = _userData.email;
-    _usernameController.text = _userData.displayName;
+  @override
+  void initState() {
+    _userServices.getUserData().then(
+          (value) => setState(() {
+            _userData = value;
+          }),
+        );
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
         title: const Text(
           'Profile',
           style: TextStyle(
@@ -47,24 +48,21 @@ class _ProfilePageState extends State<ProfilePage> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const EditProfilePage(),
+                ),
+              );
+            },
             icon: Icon(
               Icons.edit,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
         ],
         actionsIconTheme: const IconThemeData(
           color: Colors.white,
-        ),
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Theme.of(context).colorScheme.secondary,
-                Theme.of(context).colorScheme.primary,
-              ],
-            ),
-          ),
         ),
       ),
       body: Form(
@@ -180,53 +178,14 @@ class _ProfilePageState extends State<ProfilePage> {
                         Icons.email,
                         color: Theme.of(context).colorScheme.primary,
                       ),
+                      SizedBox(
+                        width: 8.0,
+                      ),
                       Text(FirebaseAuth.instance.currentUser?.email ?? 'Email'),
                     ],
                   ),
                 ],
               ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    height: 50,
-                    margin: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondary,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'Edit Profile',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    height: 50,
-                    margin: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondary,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'Change Password',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
             ),
             SizedBox(
               height: 10,
@@ -236,209 +195,32 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ProfileInfoContainer(
-                    data: 'A+',
-                    title: 'Blood Type',
-                  ),
-                  ProfileInfoContainer(
-                    data: '0',
-                    title: 'Donated',
-                  ),
-                  ProfileInfoContainer(
-                    data: '0',
-                    title: 'Requested',
-                  ),
+                  _userData == UserData.empty
+                      ? CircularProgressIndicator()
+                      : ProfileInfoContainer(
+                          data: _userData.bloodType.toString(),
+                          title: 'Blood Type',
+                          shadowColor: Theme.of(context).colorScheme.secondary,
+                        ),
+                  _userData == UserData.empty
+                      ? CircularProgressIndicator()
+                      : ProfileInfoContainer(
+                          data: _userData.donated.toString(),
+                          title: 'Donated',
+                          shadowColor: Theme.of(context).colorScheme.secondary,
+                        ),
+                  _userData == UserData.empty
+                      ? CircularProgressIndicator()
+                      : ProfileInfoContainer(
+                          data: _userData.received.toString(),
+                          title: 'Requested',
+                          shadowColor: Theme.of(context).colorScheme.secondary,
+                        ),
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(8),
-              child: Text(
-                "Email:",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.left,
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  border: Border.all(
-                    color: Theme.of(context).colorScheme.secondary,
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        '${FirebaseAuth.instance.currentUser?.email}',
-                        style: const TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text('Update Email'),
-                              content: TextField(
-                                controller: _emailController,
-                                decoration: const InputDecoration(
-                                  hintText: 'Enter new email',
-                                ),
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text('Cancel'),
-                                ),
-                                TextButton(
-                                  onPressed: () async {
-                                    await _userServices.updateEmail(
-                                      _emailController.text,
-                                    );
-                                    setState(() {
-                                      Navigator.of(context).pop();
-                                    });
-                                  },
-                                  child: const Text('Update'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                      icon: Icon(
-                        Icons.edit,
-                      ),
-                      color: Theme.of(context).colorScheme.primary,
-                      alignment: Alignment.center,
-                      style: ButtonStyle(
-                        shape: WidgetStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        backgroundColor: WidgetStatePropertyAll(
-                          Colors.white,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(8),
-              child: Text(
-                "Username:",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.left,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  border: Border.all(
-                    color: Theme.of(context).colorScheme.secondary,
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        FirebaseAuth.instance.currentUser?.displayName ??
-                            'Username',
-                        style: const TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text('Update Username'),
-                              content: TextField(
-                                controller: _usernameController,
-                                decoration: const InputDecoration(
-                                  hintText: 'Enter new username',
-                                ),
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text('Cancel'),
-                                ),
-                                TextButton(
-                                  onPressed: () async {
-                                    await _userServices.updateDisplayName(
-                                      _usernameController.text,
-                                    );
-                                    setState(() {
-                                      Navigator.of(context).pop();
-                                    });
-                                  },
-                                  child: const Text('Update'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                      icon: Icon(
-                        Icons.edit,
-                      ),
-                      color: Theme.of(context).colorScheme.primary,
-                      alignment: Alignment.center,
-                      style: ButtonStyle(
-                        shape: WidgetStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        backgroundColor: WidgetStatePropertyAll(
-                          Colors.white,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Center(
               child: TextButton(
                 onPressed: () async {
                   await _userServices.deleteUser();

@@ -27,20 +27,27 @@ class AuthenticationServices {
   }
 
   // Register with email and password
-  Future registerWithEmailAndPassword(String email, String password) async {
+  Future registerWithEmailAndPassword(
+    String email,
+    String password,
+    String displayName,
+    String bloodType,
+  ) async {
     try {
       UserCredential userCredential =
           await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      await userCredential.user?.updateDisplayName(displayName);
       await _firestore.collection("Users").doc(userCredential.user?.uid).set(
         {
           "uid": userCredential.user?.uid,
           "email": email,
           "password": password,
+          "bloodType": bloodType,
           "phone": "",
-          "displayName": "",
+          "displayName": displayName,
           "photoURL": "",
           "bio": "",
           "city": "",

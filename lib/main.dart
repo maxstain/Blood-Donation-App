@@ -1,4 +1,4 @@
-import 'package:blood_donation/Views/Authentication/authentication.dart';
+import 'package:blood_donation/Views/Authentication/login_page.dart';
 import 'package:blood_donation/Views/Home/home_page.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -48,7 +48,7 @@ class Wrapper extends StatelessWidget {
     if (FirebaseAuth.instance.currentUser != null) {
       return const HomePage();
     } else {
-      return const Authentication();
+      return const LoginPage();
     }
   }
 }

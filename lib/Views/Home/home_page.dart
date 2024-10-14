@@ -1,11 +1,11 @@
 import 'package:blood_donation/Services/AuthenticationServices.dart';
 import 'package:blood_donation/Shared/shared_data.dart';
 import 'package:blood_donation/Shared/shared_types.dart';
-import 'package:blood_donation/Views/Authentication/authentication.dart';
 import 'package:blood_donation/Views/Offers/offer_page.dart';
 import 'package:blood_donation/Views/Offers/offers_page.dart';
 import 'package:blood_donation/Views/Profile/profile_page.dart';
 import 'package:blood_donation/Widgets/request_card.dart';
+import 'package:blood_donation/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -89,25 +89,7 @@ class _HomePageState extends State<HomePage>
         },
         child: const Icon(Icons.add),
       ),
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-        title: const Text(
-          'Blood Donation',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Theme.of(context).colorScheme.secondary,
-                Theme.of(context).colorScheme.primary,
-              ],
-            ),
-          ),
-        ),
-      ),
+      appBar: AppBar(),
       drawer: Drawer(
         child: ListView(
           children: [
@@ -196,8 +178,7 @@ class _HomePageState extends State<HomePage>
                       Navigator.of(context).pop();
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              const Authentication(),
+                          builder: (BuildContext context) => const Wrapper(),
                         ),
                       );
                     },

@@ -1,168 +1,22 @@
 import 'package:blood_donation/Services/AuthenticationServices.dart';
+import 'package:blood_donation/Views/Authentication/login_page.dart';
 import 'package:blood_donation/main.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class Authentication extends StatefulWidget {
-  const Authentication({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  _AuthenticationState createState() => _AuthenticationState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _AuthenticationState extends State<Authentication> {
+class _RegisterPageState extends State<RegisterPage> {
   TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-
-  final _formKey = GlobalKey<FormState>();
-
-  @override
-  Widget build(BuildContext context) {
-    Color selectedColor = Colors.black;
-    return Scaffold(
-      body: Form(
-        key: _formKey,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        child: ListView(
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(
-                top: 150.0,
-                bottom: 40.0,
-              ),
-              child: Center(
-                child: Text(
-                  'Login',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 8.0,
-                horizontal: 16.0,
-              ),
-              child: TextFormField(
-                controller: emailController,
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  icon: Icon(
-                    Icons.email,
-                    color: selectedColor,
-                  ),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a valid email address';
-                  }
-                  return null;
-                },
-                onTap: () {
-                  setState(() {
-                    selectedColor = Colors.red;
-                  });
-                },
-                onTapOutside: (PointerDownEvent event) {
-                  setState(() {
-                    selectedColor = Colors.black;
-                  });
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 8.0,
-                horizontal: 16.0,
-              ),
-              child: TextFormField(
-                obscureText: true,
-                controller: passwordController,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  icon: Icon(
-                    Icons.key,
-                    color: selectedColor,
-                  ),
-                ),
-                onTap: () {
-                  setState(() {
-                    selectedColor = Colors.red;
-                  });
-                },
-                onTapOutside: (PointerDownEvent event) {
-                  setState(() {
-                    selectedColor = Colors.black;
-                  });
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 20.0,
-              ),
-              child: ElevatedButton(
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    if (emailController.text != '' &&
-                        passwordController.text != '') {
-                      await AuthenticationServices().signInWithEmailAndPassword(
-                          emailController.text, passwordController.text);
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => const Wrapper(),
-                        ),
-                      );
-                    } else {
-                      Fluttertoast.showToast(msg: "Please fill all fields");
-                    }
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 16.0,
-                    horizontal: 150.0,
-                  ),
-                ),
-                child: const Text('Login'),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('Don\'t have an account?'),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const Register(),
-                      ),
-                    );
-                  },
-                  child: const Text('Register'),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class Register extends StatefulWidget {
-  const Register({super.key});
-
-  @override
-  _RegisterState createState() => _RegisterState();
-}
-
-class _RegisterState extends State<Register> {
-  TextEditingController emailController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController bloodTypeController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -175,9 +29,9 @@ class _RegisterState extends State<Register> {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: ListView(
           children: [
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(
-                top: 150.0,
+                top: 30.0,
                 bottom: 40.0,
               ),
               child: Center(
@@ -186,14 +40,63 @@ class _RegisterState extends State<Register> {
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ),
             ),
-            Padding(
+            Container(
               padding: const EdgeInsets.symmetric(
+                vertical: 2.0,
+                horizontal: 8.0,
+              ),
+              margin: const EdgeInsets.symmetric(
                 vertical: 8.0,
                 horizontal: 16.0,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: TextFormField(
+                controller: usernameController,
+                decoration: InputDecoration(
+                  labelText: 'Username',
+                  icon: Icon(
+                    Icons.person,
+                    color: selectedColor,
+                  ),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a valid username';
+                  }
+                  return null;
+                },
+                onTap: () {
+                  setState(() {
+                    selectedColor = Colors.red;
+                  });
+                },
+                onTapOutside: (PointerDownEvent event) {
+                  setState(() {
+                    selectedColor = Colors.black;
+                  });
+                },
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                vertical: 2.0,
+                horizontal: 8.0,
+              ),
+              margin: const EdgeInsets.symmetric(
+                vertical: 8.0,
+                horizontal: 16.0,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(8.0),
               ),
               child: TextFormField(
                 controller: emailController,
@@ -222,10 +125,18 @@ class _RegisterState extends State<Register> {
                 },
               ),
             ),
-            Padding(
+            Container(
               padding: const EdgeInsets.symmetric(
+                vertical: 2.0,
+                horizontal: 8.0,
+              ),
+              margin: const EdgeInsets.symmetric(
                 vertical: 8.0,
                 horizontal: 16.0,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(8.0),
               ),
               child: TextFormField(
                 obscureText: true,
@@ -255,10 +166,18 @@ class _RegisterState extends State<Register> {
                 },
               ),
             ),
-            Padding(
+            Container(
               padding: const EdgeInsets.symmetric(
+                vertical: 2.0,
+                horizontal: 8.0,
+              ),
+              margin: const EdgeInsets.symmetric(
                 vertical: 8.0,
                 horizontal: 16.0,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(8.0),
               ),
               child: TextFormField(
                 obscureText: true,
@@ -288,9 +207,46 @@ class _RegisterState extends State<Register> {
                 },
               ),
             ),
-            Padding(
+            Container(
+              padding: const EdgeInsets.symmetric(
+                vertical: 2.0,
+                horizontal: 8.0,
+              ),
+              margin: const EdgeInsets.symmetric(
+                vertical: 8.0,
+                horizontal: 16.0,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: TextFormField(
+                controller: bloodTypeController,
+                decoration: InputDecoration(
+                  labelText: 'Blood type',
+                  icon: Icon(
+                    Icons.bloodtype,
+                    color: selectedColor,
+                  ),
+                ),
+                onTap: () {
+                  setState(() {
+                    selectedColor = Colors.red;
+                  });
+                },
+                onTapOutside: (PointerDownEvent event) {
+                  setState(() {
+                    selectedColor = Colors.black;
+                  });
+                },
+              ),
+            ),
+            Container(
               padding: const EdgeInsets.symmetric(
                 vertical: 20.0,
+              ),
+              margin: const EdgeInsets.symmetric(
+                horizontal: 8.0,
               ),
               child: ElevatedButton(
                 onPressed: () async {
@@ -302,7 +258,11 @@ class _RegisterState extends State<Register> {
                           confirmPasswordController.text) {
                         await AuthenticationServices()
                             .registerWithEmailAndPassword(
-                                emailController.text, passwordController.text);
+                          emailController.text,
+                          passwordController.text,
+                          usernameController.text,
+                          bloodTypeController.text,
+                        );
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
                             builder: (context) => const Wrapper(),
@@ -319,10 +279,15 @@ class _RegisterState extends State<Register> {
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(
                     vertical: 16.0,
-                    horizontal: 150.0,
+                  ),
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                ),
+                child: const Text(
+                  'Register',
+                  style: TextStyle(
+                    color: Colors.white,
                   ),
                 ),
-                child: const Text('Register'),
               ),
             ),
             Row(
@@ -333,7 +298,7 @@ class _RegisterState extends State<Register> {
                   onPressed: () {
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => const Authentication(),
+                        builder: (context) => const LoginPage(),
                       ),
                     );
                   },

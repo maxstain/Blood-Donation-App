@@ -4,6 +4,7 @@ import 'package:blood_donation/Models/UserData.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Userservices {
@@ -64,6 +65,9 @@ class Userservices {
           .get();
       return UserData.fromMap(documentSnapshot.data() as Map<String, dynamic>);
     } catch (e) {
+      if (kDebugMode) {
+        print("Error: $e");
+      }
       Fluttertoast.showToast(msg: "Failed to get user data");
       return UserData.empty;
     }
@@ -94,7 +98,10 @@ class Userservices {
 
   Future<void> deleteUser() async {
     try {
+      await _storage.ref("profile_pictures/${_auth.currentUser?.uid}").delete();
+      await _firestore.collection("Users").doc(_auth.currentUser?.uid).delete();
       await _auth.currentUser?.delete();
+      await _auth.signOut();
     } catch (e) {
       print(e);
     }
