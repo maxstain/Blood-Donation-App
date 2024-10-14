@@ -1,9 +1,12 @@
+import 'package:blood_donation/Models/UserData.dart';
 import 'package:blood_donation/Services/UserServices.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class EditProfilePage extends StatefulWidget {
-  const EditProfilePage({super.key});
+  final UserData userData;
+
+  const EditProfilePage({super.key, required this.userData});
 
   @override
   State<EditProfilePage> createState() => _EditProfilePageState();
@@ -242,7 +245,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           const Padding(
             padding: EdgeInsets.all(8),
             child: Text(
-              "Username:",
+              "Password:",
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -268,8 +271,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: Text(
-                      FirebaseAuth.instance.currentUser?.displayName ??
-                          'Password',
+                      widget.userData.password.replaceAll(RegExp(r'.'), '*'),
                       style: const TextStyle(
                         fontSize: 18,
                         color: Colors.black,
