@@ -1,4 +1,13 @@
-enum BloodTypes { Apos, Aneg, Bpos, Bneg, ABpos, ABneg, Opos, Oneg }
+List<String> bloodTypes = [
+  'A+',
+  'A-',
+  'B+',
+  'B-',
+  'AB+',
+  'AB-',
+  'O+',
+  'O-',
+];
 
 enum DonationStatus { pending, accepted, rejected }
 

@@ -1,4 +1,5 @@
 import 'package:blood_donation/Services/AuthenticationServices.dart';
+import 'package:blood_donation/Shared/shared_types.dart';
 import 'package:blood_donation/Views/Authentication/login_page.dart';
 import 'package:blood_donation/main.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
-  TextEditingController bloodTypeController = TextEditingController();
+  String _selectedBloodType = 'A+';
 
   final _formKey = GlobalKey<FormState>();
 
@@ -220,25 +221,35 @@ class _RegisterPageState extends State<RegisterPage> {
                 color: Colors.grey[200],
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              child: TextFormField(
-                controller: bloodTypeController,
+              child: DropdownButtonFormField(
                 decoration: InputDecoration(
-                  labelText: 'Blood type',
+                  labelText: 'Blood Type',
                   icon: Icon(
                     Icons.bloodtype,
                     color: selectedColor,
                   ),
                 ),
+                value: _selectedBloodType,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedBloodType = value.toString();
+                  });
+                },
                 onTap: () {
                   setState(() {
                     selectedColor = Colors.red;
                   });
                 },
-                onTapOutside: (PointerDownEvent event) {
-                  setState(() {
-                    selectedColor = Colors.black;
-                  });
-                },
+                items: bloodTypes.map(
+                  (String bloodType) {
+                    return DropdownMenuItem(
+                      value: bloodType,
+                      child: Text(
+                        bloodType,
+                      ),
+                    );
+                  },
+                ).toList(),
               ),
             ),
             Container(
@@ -261,7 +272,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           emailController.text,
                           passwordController.text,
                           usernameController.text,
-                          bloodTypeController.text,
+                          _selectedBloodType,
                         );
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(

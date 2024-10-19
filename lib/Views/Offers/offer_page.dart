@@ -86,7 +86,7 @@ class _OfferPageState extends State<OfferPage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'Blood type: ${getBloodType(widget.offer.bloodType)}',
+                  'Blood type: ${widget.offer.bloodType}',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
@@ -142,27 +142,6 @@ class _OfferPageState extends State<OfferPage> {
         ],
       ),
     );
-  }
-
-  getBloodType(BloodTypes bloodType) {
-    switch (bloodType) {
-      case BloodTypes.Apos:
-        return 'A+';
-      case BloodTypes.Aneg:
-        return 'A-';
-      case BloodTypes.Bpos:
-        return 'B+';
-      case BloodTypes.Bneg:
-        return 'B-';
-      case BloodTypes.ABpos:
-        return 'AB+';
-      case BloodTypes.ABneg:
-        return 'AB-';
-      case BloodTypes.Opos:
-        return 'O+';
-      case BloodTypes.Oneg:
-        return 'O-';
-    }
   }
 
   getDonationStatue(DonationStatus donationStatus) {
