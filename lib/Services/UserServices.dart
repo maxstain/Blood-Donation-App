@@ -42,6 +42,17 @@ class Userservices {
     }
   }
 
+  Future<void> updateBloodType(String bloodType) async {
+    try {
+      await _firestore
+          .collection('Users')
+          .doc(_auth.currentUser?.uid)
+          .update({'bloodType': bloodType});
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<User?> updateDisplayName(String displayName) async {
     try {
       await _auth.currentUser?.updateDisplayName(displayName);
