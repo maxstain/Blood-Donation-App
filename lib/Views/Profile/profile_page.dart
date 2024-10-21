@@ -226,8 +226,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: TextButton(
                 onPressed: () async {
                   await _userServices.deleteUser();
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pushReplacement(
+                  await Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) => const Wrapper(),
                     ),
