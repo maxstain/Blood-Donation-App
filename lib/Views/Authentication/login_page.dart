@@ -57,6 +57,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               child: TextFormField(
                 controller: emailController,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   labelText: 'Email',
                   icon: Icon(
@@ -98,6 +99,7 @@ class _LoginPageState extends State<LoginPage> {
               child: TextFormField(
                 obscureText: true,
                 controller: passwordController,
+                keyboardType: TextInputType.visiblePassword,
                 decoration: InputDecoration(
                   labelText: 'Password',
                   icon: Icon(

@@ -68,12 +68,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     color: selectedColor,
                   ),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a valid username';
-                  }
-                  return null;
-                },
+                keyboardType: TextInputType.name,
                 onTap: () {
                   setState(() {
                     selectedColor = Colors.red;
@@ -101,6 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               child: TextFormField(
                 controller: emailController,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   labelText: 'Email',
                   icon: Icon(
@@ -108,12 +104,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     color: selectedColor,
                   ),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a valid email address';
-                  }
-                  return null;
-                },
                 onTap: () {
                   setState(() {
                     selectedColor = Colors.red;
@@ -141,6 +131,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               child: TextFormField(
                 obscureText: true,
+                keyboardType: TextInputType.visiblePassword,
                 controller: passwordController,
                 decoration: InputDecoration(
                   labelText: 'Password',
@@ -149,12 +140,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     color: selectedColor,
                   ),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a valid password';
-                  }
-                  return null;
-                },
                 onTap: () {
                   setState(() {
                     selectedColor = Colors.red;
@@ -182,6 +167,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               child: TextFormField(
                 obscureText: true,
+                keyboardType: TextInputType.visiblePassword,
                 controller: confirmPasswordController,
                 decoration: InputDecoration(
                   labelText: 'Confirm Password',
@@ -190,12 +176,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     color: selectedColor,
                   ),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a valid password';
-                  }
-                  return null;
-                },
                 onTap: () {
                   setState(() {
                     selectedColor = Colors.red;
