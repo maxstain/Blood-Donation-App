@@ -109,10 +109,11 @@ class Userservices {
 
   Future<void> deleteUser() async {
     try {
-      await _storage.ref("profile_pictures/${_auth.currentUser?.uid}").delete();
+      // TODO: Delete user profile picture if exists
+      // await _storage.ref("profile_pictures/${_auth.currentUser?.uid}").delete();
       await _firestore.collection("Users").doc(_auth.currentUser?.uid).delete();
-      await _auth.currentUser?.delete();
       await _auth.signOut();
+      await _auth.currentUser?.delete();
     } catch (e) {
       print(e);
     }
