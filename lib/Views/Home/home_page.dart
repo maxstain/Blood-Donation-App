@@ -294,7 +294,7 @@ class _HomePageState extends State<HomePage>
                                   ),
                                 ),
                                 Positioned(
-                                  top: 100,
+                                  top: 70,
                                   left: 0,
                                   right: 0,
                                   child: Column(
@@ -311,6 +311,51 @@ class _HomePageState extends State<HomePage>
                                       ),
                                       Text(
                                         offers[index].description,
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: Colors.white,
+                                              border: Border.all(
+                                                color: Colors.black,
+                                                width: 1,
+                                              ),
+                                            ),
+                                            padding: const EdgeInsets.all(20),
+                                            child: Text(
+                                              offers[index].bloodType,
+                                              style: TextStyle(
+                                                color: Colors.red,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ),
+                                          Text(
+                                            offers[index].donationStatus ==
+                                                    DonationStatus.pending
+                                                ? "Pending"
+                                                : "Completed",
+                                            style: TextStyle(
+                                              color: offers[index]
+                                                          .donationStatus ==
+                                                      DonationStatus.pending
+                                                  ? Colors.red
+                                                  : Colors.green,
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
