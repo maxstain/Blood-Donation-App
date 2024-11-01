@@ -259,19 +259,60 @@ class _HomePageState extends State<HomePage>
                         context: context,
                         builder: (BuildContext context) {
                           return Container(
-                            height: 700,
-                            color: Colors.white,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                            ),
+                            height: 900,
+                            width: double.infinity,
                             child: Stack(
+                              clipBehavior: Clip.none,
                               children: [
                                 Positioned(
-                                  top: -20,
+                                  top: -60,
                                   left: 0,
                                   right: 0,
-                                  child: Image.asset(
-                                    height: 100,
-                                    width: 100,
-                                    offers[index].image,
-                                    fit: BoxFit.cover,
+                                  child: CircleAvatar(
+                                    radius: 60,
+                                    backgroundColor: Colors.white,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Colors.white,
+                                          width: 5,
+                                        ),
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(20),
+                                        child: Image.asset(
+                                          offers[index].image,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 100,
+                                  left: 0,
+                                  right: 0,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        offers[index].name,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 24,
+                                        ),
+                                      ),
+                                      Text(
+                                        offers[index].description,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
