@@ -255,12 +255,30 @@ class _HomePageState extends State<HomePage>
                     title: Text(offers[index].name),
                     subtitle: Text(offers[index].description),
                     onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (BuildContext context) {
-                            return OfferPage(offer: offers[index]);
-                          },
-                        ),
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(
+                            height: 700,
+                            color: Colors.white,
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  top: -20,
+                                  left: 0,
+                                  right: 0,
+                                  child: Image.asset(
+                                    height: 100,
+                                    width: 100,
+                                    offers[index].image,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        backgroundColor: Colors.white,
                       );
                     },
                   );
