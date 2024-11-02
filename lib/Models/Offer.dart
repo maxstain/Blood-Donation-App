@@ -8,6 +8,7 @@ class Offer {
   late String bloodType;
   late UserTypes userType = UserTypes.donor;
   late DonationStatus donationStatus = DonationStatus.pending;
+  late DateTime donationDate = DateTime.now();
 
   Offer({
     required this.id,
@@ -32,6 +33,9 @@ class Offer {
         : json['donationStatus'] == 'accepted'
             ? DonationStatus.accepted
             : DonationStatus.rejected;
+    donationDate = json['donationDate'] == null
+        ? DateTime.now()
+        : DateTime.parse(json['donationDate']);
   }
 
   Map<String, dynamic> toJson() {
@@ -47,6 +51,7 @@ class Offer {
         : donationStatus == DonationStatus.accepted
             ? 'accepted'
             : 'rejected';
+    data['donationDate'] = donationDate.toString();
     return data;
   }
 

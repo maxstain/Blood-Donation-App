@@ -4,6 +4,7 @@ import 'package:blood_donation/Shared/shared_types.dart';
 import 'package:blood_donation/Views/Offers/offer_page.dart';
 import 'package:blood_donation/Views/Offers/offers_page.dart';
 import 'package:blood_donation/Views/Profile/profile_page.dart';
+import 'package:blood_donation/Widgets/bottom_sheet_widget.dart';
 import 'package:blood_donation/Widgets/request_card.dart';
 import 'package:blood_donation/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -258,111 +259,7 @@ class _HomePageState extends State<HomePage>
                       showModalBottomSheet(
                         context: context,
                         builder: (BuildContext context) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                            ),
-                            height: 900,
-                            width: double.infinity,
-                            child: Stack(
-                              clipBehavior: Clip.none,
-                              children: [
-                                Positioned(
-                                  top: -60,
-                                  left: 0,
-                                  right: 0,
-                                  child: CircleAvatar(
-                                    radius: 60,
-                                    backgroundColor: Colors.white,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Colors.white,
-                                          width: 5,
-                                        ),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(20),
-                                        child: Image.asset(
-                                          offers[index].image,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 70,
-                                  left: 0,
-                                  right: 0,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        offers[index].name,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 24,
-                                        ),
-                                      ),
-                                      Text(
-                                        offers[index].description,
-                                      ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              color: Colors.white,
-                                              border: Border.all(
-                                                color: Colors.black,
-                                                width: 1,
-                                              ),
-                                            ),
-                                            padding: const EdgeInsets.all(20),
-                                            child: Text(
-                                              offers[index].bloodType,
-                                              style: TextStyle(
-                                                color: Colors.red,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 18,
-                                              ),
-                                            ),
-                                          ),
-                                          Text(
-                                            offers[index].donationStatus ==
-                                                    DonationStatus.pending
-                                                ? "Pending"
-                                                : "Completed",
-                                            style: TextStyle(
-                                              color: offers[index]
-                                                          .donationStatus ==
-                                                      DonationStatus.pending
-                                                  ? Colors.red
-                                                  : Colors.green,
-                                              fontSize: 18,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
+                          return BottomSheetWidget(offer: offers[index]);
                         },
                         backgroundColor: Colors.white,
                       );
