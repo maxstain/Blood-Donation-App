@@ -1,5 +1,6 @@
 import 'package:blood_donation/Models/Offer.dart';
 import 'package:blood_donation/Shared/shared_types.dart';
+import 'package:blood_donation/Views/Offers/offer_page.dart';
 import 'package:flutter/material.dart';
 
 class BottomSheetWidget extends StatefulWidget {
@@ -111,7 +112,43 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                   height: 20,
                 ),
                 Row(
-                  children: [],
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.red,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text(
+                        "Accept",
+                      ),
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.black,
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50),
+                          side: const BorderSide(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (ctx) => OfferPage(offer: widget.offer),
+                          ),
+                        );
+                      },
+                      child: const Text("More Info"),
+                    ),
+                  ],
                 ),
               ],
             ),
