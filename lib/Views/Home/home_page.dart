@@ -246,26 +246,27 @@ class _HomePageState extends State<HomePage>
           Expanded(
             flex: 1,
             child: ListView.builder(
-                itemCount: offers.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    leading: const Icon(
-                      Icons.bloodtype,
-                      color: Colors.red,
-                    ),
-                    title: Text(offers[index].name),
-                    subtitle: Text(offers[index].description),
-                    onTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return BottomSheetWidget(offer: offers[index]);
-                        },
-                        backgroundColor: Colors.white,
-                      );
-                    },
-                  );
-                }),
+              itemCount: offers.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  leading: const Icon(
+                    Icons.bloodtype,
+                    color: Colors.red,
+                  ),
+                  title: Text(offers[index].name),
+                  subtitle: Text(offers[index].description),
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return BottomSheetWidget(offer: offers[index]);
+                      },
+                      backgroundColor: Colors.white,
+                    );
+                  },
+                );
+              },
+            ),
           ),
         ],
       ),
