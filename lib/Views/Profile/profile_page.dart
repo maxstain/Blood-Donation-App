@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:blood_donation/Models/UserData.dart';
 import 'package:blood_donation/Services/UserServices.dart';
 import 'package:blood_donation/Views/Profile/edit_profile_page.dart';
+import 'package:blood_donation/Views/Splash/spalsh_page.dart';
 import 'package:blood_donation/Widgets/profile_info_container.dart';
-import 'package:blood_donation/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -228,7 +228,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   await _userServices.deleteUser();
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
-                      builder: (context) => const Wrapper(),
+                      builder: (context) => const SplashPage(),
                     ),
                   );
                 },

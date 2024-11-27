@@ -1,6 +1,6 @@
 import 'package:blood_donation/Services/AuthenticationServices.dart';
 import 'package:blood_donation/Views/Authentication/register_page.dart';
-import 'package:blood_donation/main.dart';
+import 'package:blood_donation/Views/Splash/spalsh_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
