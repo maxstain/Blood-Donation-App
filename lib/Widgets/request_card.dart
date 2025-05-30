@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class RequestCard extends StatefulWidget {
   final Offer offer;
 
-  const RequestCard({Key? key, required this.offer}) : super(key: key);
+  const RequestCard({super.key, required this.offer});
 
   @override
   _RequestCardState createState() => _RequestCardState();
