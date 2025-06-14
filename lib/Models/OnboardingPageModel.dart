@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 class OnboardingPageModel {
   final String imagePath; // Path to SVG or Lottie asset
   final String title;
