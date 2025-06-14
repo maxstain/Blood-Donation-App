@@ -144,7 +144,7 @@ class _OfferPageState extends State<OfferPage> {
     );
   }
 
-  getDonationStatue(DonationStatus donationStatus) {
+  String getDonationStatue(DonationStatus donationStatus) {
     switch (donationStatus) {
       case DonationStatus.pending:
         return 'Pending';
